@@ -6,10 +6,10 @@ import { add } from './ops/add.ops';
 
 export class Perceptron {
     private _graph: Graph;
-    private A: Variable;
-    private b: Variable;
-    private x: Placeholder;
-    private y: multiply;
+    private _A: Variable;
+    private _b: Variable;
+    private _x: Placeholder;
+    private _y: multiply;
     private _z: add;
 
     constructor() {
@@ -19,11 +19,11 @@ export class Perceptron {
     private _init() {
         this._graph = new Graph();
 
-        this.A = new Variable(10);
-        this.b = new Variable(1);
-        this.x = new Placeholder();
-        this.y = new multiply(this.A, this.x);
-        this._z = new add(this.y, this.b);
+        this._A = new Variable(10);
+        this._b = new Variable(1);
+        this._x = new Placeholder();
+        this._y = new multiply(this._A, this._x);
+        this._z = new add(this._y, this._b);
     }
 
     get z() {

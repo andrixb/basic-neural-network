@@ -6,28 +6,31 @@ import { Variable } from './variable.class';
 export class Session {
     private _nodesPostorder: any;
 
-    constructor() {
-    //     this._nodesPostorder = new Operation();
-    }
+    constructor() {}
     
     run(operation: Operation, feedDict = {}) {
         this._nodesPostorder = traversePostorder(operation);
 
         for (let node in this._nodesPostorder) {
+            let dictIndex = 0;
             let currentNode = this._nodesPostorder[node];
 
-            if (currentNode instanceof  Placeholder) {
-                currentNode.output = feedDict[node];
+            if (currentNode instanceof Placeholder) {
+                currentNode.output = feedDict[dictIndex];
+                dictIndex++;
             } else if (currentNode instanceof Variable) {
                 currentNode.output = currentNode.value;
             } else {
                 for (let inputNode in currentNode.inputNodes) {
-                    currentNode.inputNodes.push(currentNode[inputNode]);
+                    if (currentNode.inputNodes[inputNode].output !== undefined || 
+                        currentNode.inputNodes[inputNode].output !== NaN) {
+                        currentNode.input = currentNode.inputNodes[inputNode].output;
+                    }
                 }
                 currentNode.output = currentNode.compute(currentNode.input);
+                console.log(currentNode.output)
             }
         }
-
         return operation.output;
     }
 }

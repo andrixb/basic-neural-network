@@ -1,10 +1,12 @@
 export class Operation {
     private _inputNodes: any;
     private _outputNodes: any[];
+    private _input: any[];
 
     constructor(inputNodes: any[]){
         this._outputNodes = [];
         this._inputNodes = inputNodes;
+        this._input = [];
         
         this._init();
     }
@@ -21,6 +23,14 @@ export class Operation {
 
     set inputNodes(value: any) {
         this._inputNodes.push(value);
+    }
+
+    get input() {
+        return this._input;
+    }
+
+    set input(value: any) {
+        this._input.push(value);
     }
 
     get output() {

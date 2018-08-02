@@ -28,6 +28,7 @@ export class Session {
                     }
                 }
                 currentNode.output = currentNode.compute(currentNode.input);
+                // the output is not correct. check what goes in the inputs of the Operation
                 console.log(currentNode.output)
             }
         }
